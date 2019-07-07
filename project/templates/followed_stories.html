@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1 class="title">Hi, {{ current_user.name }}!</h1>
+
+    {% if form %}
+        <h2 class="subtitle">
+            This page shows all posts of the users you follow.
+        </h2>
+    {% endif %}
+
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+
+{% endblock %}

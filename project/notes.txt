@@ -1,0 +1,26 @@
+# ANACONDA VM 'snakes': Python 3.6.8 64bit
+
+# set the FLASK_APP and FLASK_DEBUG values and run the project !!outside of "project" Folder!!
+export FLASK_APP=project
+export FLASK_DEBUG=1
+flask run
+
+# Create DB:
+- open Terminal and go on top of project Folder
+- make sure the right environment is running: "conda activate snakes"
+- go into Python REPL and type:
+from project import db, create_app
+db.create_all(app=create_app()) # pass the create_app result so Flask-SQLAlchemy gets the configuration.
+--> db.sqlite should appear in project directory
+
+
+# if you wish to have more functionality from the beginning, you may want to consider using 
+# either the Flask-User or Flask-Security libraries, 
+# which are both build on top of the Flask-Login library.
+# https://scotch.io/tutorials/authentication-and-authorization-with-flask-login#comments
+
+Database Migration should be added to keep data when making changes to the Db model
+https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database
+
+Styling of Flask Forms:
+https://stackoverflow.com/questions/34738331/using-flask-wtforms-how-do-i-style-my-form-section-of-the-html

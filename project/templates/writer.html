@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!--.<h1 class="title">{{ storyname }}</h1>
+
+    <h2 class="subtitle">
+        Add your post to a Story
+    </h2>-->
+
+    <form action="" method="post">
+        
+        {{ storyform.hidden_tag() }}
+            <!--{{ storyform.storyname.label }}<br>-->
+            {{ storyform.storyname(class_='textarea is-large is-primary is-shadowless has-fixed-size has-background-primary has-text-white has-text-weight-bold has-text-centered') }}<br>
+            {% for error in storyform.storyname.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        
+        <!--<p>{{ storyform.submitstoryname() }}</p>-->
+
+    <form action="" method="post">
+        {{ postform.hidden_tag() }}
+            <!--{{ postform.post.label }}<br>-->
+            {{ postform.post(class_='textarea has-fixed-size', rows=8, placeholder='Write something that will be added to this Story! :)') }}<br>
+            {% for error in postform.post.errors %}
+            <span style="color: red;">[{{ error}}]</span>
+            {% endfor %}
+        
+        <p>{{ postform.submit(class_='button is-white is-danger') }}</p>
+    </form>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="container is-fluid">
+                <div class="notification is-danger">
+                    {{ messages[0] }}
+                </div>
+            </div><br>
+        {% endif %}
+    {% endwith %}
+
+    {% for post in posts %}
+        {% include '_post.html' %}
+    {% endfor %}
+
+{% endblock %}

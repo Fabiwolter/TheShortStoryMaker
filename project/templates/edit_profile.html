@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="column is-8 is-offset-2">
+    <h1 class="title">
+        Edit Profile
+    </h1>
+    <div class="box">
+        <form action="" method="post">
+            <div class="form-group">
+                {{ form.hidden_tag() }}
+                <div class="field">
+                    <h5>
+                        {{ form.username.label }}<br>
+                        {{ form.username(class_='input is-primary') }}<br>
+                        {% for error in form.username.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </h5>
+                </div>
+                <div class="field">
+                    <p>
+                        {{ form.about_me.label }}<br>
+                        {{ form.about_me(class_='textarea', rows=4) }}<br>
+                        {% for error in form.about_me.errors %}
+                        <span style="color: red;">[{{ error }}]</span>
+                        {% endfor %}
+                    </p>
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                        <div class="container is-fluid">
+                            <div class="notification is-primary">
+                            {{ messages[0] }}
+                            </div>
+                        </div><br>
+                        {% endif %}
+                    {% endwith %}
+                    <p>{{ form.submit(class_='button is-primary') }}</p>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

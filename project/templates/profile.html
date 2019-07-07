@@ -1,0 +1,49 @@
+<!-- templates/profile.html -->
+
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h1 class="title">
+    Oh Hi, {{ name }}!
+  </h1>
+
+  <div class="colums">
+    <div class="column is-1 is-offset-5">
+      <div>
+        <figure class="image is-128x128">
+          <img class="is-rounded" src="{{ user.avatar(128) }}">
+        </figure>
+      </div>
+    </div>
+    <div>
+      {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+      <!--{% if user.last_seen %}<p>Last seen on: {{ user.last_seen }}</p>{% endif %}-->
+
+      <p>{{ user.followers.count() }} followers, {{ user.followed.count() }} following.</p>
+      {% if not current_user.is_following(user) %}
+        <p><a class="button is-danger" href="{{ url_for('main.follow', name=user.name) }}">Follow</a></p>
+      {% else %}
+        <p><a class="button is-danger" href="{{ url_for('main.unfollow', name=user.name) }}">Unfollow</a></p>
+      {% endif %}
+
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="container is-fluid">
+            <div class="notification is-danger">
+              {{ messages[0] }}
+            </div>
+          </div><br>
+        {% endif %}
+      {% endwith %}
+
+    </div>
+  </div>
+
+  <!--<hr>-->
+
+  {% for post in posts %}
+    {% include '_post.html' %}
+  {% endfor %}
+
+{% endblock %}

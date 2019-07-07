@@ -1,0 +1,24 @@
+{% if post.storyname %}
+    <div class="box">
+        <article class="media">
+            <div class="media-left">
+                <figure class="image is-32x32">
+                    <img class="is-rounded" src="{{ post.author.avatar(32) }}">
+                </figure>
+            </div>
+            <div class="media-content">
+                <div class="content">
+                    <a href="{{ url_for('main.profile', name=post.author.name) }}">
+                        <strong>{{ post.author.name }}</strong>
+                    </a> 
+                    <small><a href="{{ url_for('main.writer', storyname=post.storyname) }}">
+                        {{ post.storyname }}
+                    </a></small> <br>
+                    <a href="{{ url_for('main.writer', storyname=post.storyname) }}">
+                        {{ post.body }}
+                    </a>
+                </div>
+            </div>
+        </article>
+    </div>
+{% endif %}
